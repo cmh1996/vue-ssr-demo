@@ -1,0 +1,4 @@
+{
+  "presets": [["env", { "momdules": false }], "stage-2"],
+  "plugins": ["syntax-dynamic-import"]
+}
