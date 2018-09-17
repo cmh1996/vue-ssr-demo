@@ -43,7 +43,6 @@ router.onReady(_ => {
     }
 
     // 开始预取 数据
-    notify('Prefetch data...')
     Promise.all(activatedAsyncHooks.map(hook => hook({ store, route: to })))
       .then(_ => {
         console.log('ok')
@@ -54,18 +53,3 @@ router.onReady(_ => {
 
   app.$mount('#app') // 客户端激活
 })
-
-
-function notify(title) {
-  if (!('Notification' in window)) {
-    return
-  } else if (Notification.permission === 'granted') {
-    return new Notification(title)
-  } else {
-    Notification.requestPermission(permission => {
-      if (permission === 'granted') {
-        return new Notification(title)
-      }
-    })
-  }
-}

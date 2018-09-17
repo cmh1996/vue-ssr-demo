@@ -17,7 +17,6 @@ export default context => {
       if (!matchedComponnets.length) {
         return reject({ code: 404 })
       }
-
       // 服务端数据预取
       // 在路由组件上定义静态函数 asyncData,该函数在组件实例化之前调用，因而无法访问this
       // 如果匹配到的路由组建暴露了 asyncData，就调用该方法
@@ -33,7 +32,7 @@ export default context => {
       )
         .then(_ => {
           // 数据预取完成
-          context.state = store.state
+          context.state = store.state;
           resolve(app)
         })
         .catch(reject)
