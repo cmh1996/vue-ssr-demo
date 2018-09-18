@@ -19,8 +19,6 @@ export default {
   },
 
   asyncData({ store, route }) {
-    console.log('Page 2 asyncData')
-    return new Promise(resolve => setTimeout(resolve, 300))
   },
 
   methods: {

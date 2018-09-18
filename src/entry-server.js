@@ -20,6 +20,7 @@ export default context => {
       // 服务端数据预取
       // 在路由组件上定义静态函数 asyncData,该函数在组件实例化之前调用，因而无法访问this
       // 如果匹配到的路由组建暴露了 asyncData，就调用该方法
+      //asyncData函数里面只能进行ajax数据获取然后给vuex的store这种操作，之后的组件想获取这些数据就从store中取
       Promise.all(
         matchedComponnets.map(component => {
           if (component && component.asyncData) {
@@ -31,7 +32,6 @@ export default context => {
         })
       )
         .then(_ => {
-          // 数据预取完成
           context.state = store.state;
           resolve(app)
         })
