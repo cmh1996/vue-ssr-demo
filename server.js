@@ -25,12 +25,6 @@ const contentType = ()=>{
   }
 }
 
-//设置返回静态资源的路径
-//当请求访问/dist前缀的时候，把它交给koa-static处理
-const serveStatic = (url, filePath, opts = {})=>{
-  return mount(url, koaStatic(filePath, opts))
-}
-
 //创建服务端渲染
 const createRenderer = (bundle, opts = {}) => {
   return createBundleRenderer(
@@ -79,17 +73,19 @@ const render = async ctx => {
   }
 }
 
-
+//写入mimeType
 app.use(contentType());
+//设置返回静态资源的路径
+//当请求访问/dist前缀的时候，把它交给koa-static处理
 app.use(
-  serveStatic('/dist', 'dist', {
+  mount('/dist', koaStatic('dist', {
     maxAge: isProd ? 365 * 24 * 60 * 60 : 0
-  })
+  }))
 );
 router.get('*', render);
 app.use(router.routes());
 
-// 可以通过 npm run dev 9090 形式指定端口号为9090
+// 可以通过 npm run dev xxxx 形式指定端口号为xxxx
 app.listen(port, err => {
   if (err) {
     throw err

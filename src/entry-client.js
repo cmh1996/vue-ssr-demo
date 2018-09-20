@@ -10,7 +10,7 @@ if (window.__INITIAL_STATE__) {
 
 //只会在第一次打开页面的时候执行一次，激活服务器传过来的html字符串
 router.onReady(_ => {
-  ///路由跳转前触发，用来执行async
+  ///路由跳转前触发，用来执行asyncData()
   router.beforeResolve((to, from, next) => {
     const matchedComponents = router.getMatchedComponents(to);
     const prevMatchedComponents = router.getMatchedComponents(from);
